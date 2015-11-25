@@ -1,11 +1,11 @@
 mod 'stdlib',
-	:git => 'https://github.com/puppetlabs/puppetlabs-stdlib'
+  :git => 'https://github.com/puppetlabs/puppetlabs-stdlib'
 
 mod 'rbenv',
   :git => 'https://github.com/justindowning/puppet-rbenv'
 
 mod 'concat',
-	:git => 'https://github.com/puppetlabs/puppetlabs-concat'
+  :git => 'https://github.com/puppetlabs/puppetlabs-concat'
 
 mod 'postgresql',
-	:git => 'https://github.com/puppetlabs/puppetlabs-postgresql'
+  :git => 'https://github.com/puppetlabs/puppetlabs-postgresql'
