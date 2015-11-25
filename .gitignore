@@ -1,0 +1,21 @@
+*.gem
+*.rbc
+
+# Ignore bundler config
+/bin
+/.bundle
+/.vagrant
+/.vagrantfile
+/cache
+/coverage/*
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+/logfile
+log/
+
+# Vim temp files
+*~
+*.swp
+*.swo
