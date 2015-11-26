@@ -19,3 +19,6 @@ log/
 *~
 *.swp
 *.swo
+
+# Project files
+/src

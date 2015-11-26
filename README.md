@@ -7,3 +7,31 @@ Puppet Modules
 - concat
 - rbenv (ruby 2.2.3)
 - postgresql
+
+## Installing
+
+Before installing please make sure the requirements in the section below are met.
+
+### Requirements
+Install Vagrant 1.7.4.
+
+Required Vagrant plugins:
+```
+$ vagrant plugin install r10k
+```
+Recommended Vagrant plugins
+```
+$ vagrant plugin install rsync-back
+```
+
+## Usage
+After cloning this repository, use the command below so start the Vagrant environment.
+```
+$ vagrant up
+```
+### Using Rsync
+To sync changes on the host to the `/vagrant` folder shared to the guest:
+- Open a new teminal/Powershell session.
+- Type `$ vagrant rsync-auto`.
+
+The rsync-auto process will run in in the terminal until `Ctrl-C` is pressed.

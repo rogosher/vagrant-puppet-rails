@@ -54,7 +54,22 @@ postgresql::server::db { 'rails_database_production':
 	password => postgresql_password($user, $password),
 }
 
-postgresql::server::database_grant { 'test1':
+postgresql::server::db { 'dummy_development':
+	user => $user,
+	password => postgresql_password($user, $password),
+}
+
+postgresql::server::db { 'dummy_test':
+	user => $user,
+	password => postgresql_password($user, $password),
+}
+
+postgresql::server::db { 'dummy_production':
+	user => $user,
+	password => postgresql_password($user, $password),
+}
+
+postgresql::server::database_grant { 'rails_database_development':
 	privilege => 'ALL',
 	db        => 'rails_database_development',
 	role      => $user,
