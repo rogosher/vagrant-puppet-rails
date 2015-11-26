@@ -13,7 +13,7 @@ rbenv::gem { 'pg': ruby_version => '2.2.3' }
 package {'libpq-dev':
 	ensure => 'installed',
 }
-$user = 'dev'
+$user = 'vagrant'
 $password = 'password'
 
 file { '/etc/default/locale':
