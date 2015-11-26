@@ -8,27 +8,31 @@ rbenv::build { '2.2.3':
 }
 
 rbenv::gem { 'rails': ruby_version => '2.2.3' }
+rbenv::gem { 'pg': ruby_version => '2.2.3' }
 
+package {'libpq-dev':
+	ensure => 'installed',
+}
 $user = 'dev'
 $password = 'password'
 
 file { '/etc/default/locale':
-  ensure  => 'file',
-  owner   => 'root',
-  group   => 'root',
-  content => "LANG=en_US.UTF-8\n",
+	ensure  => 'file',
+	owner   => 'root',
+	group   => 'root',
+	content => "LANG=en_US.UTF-8\n",
 } ->
 class { 'postgresql::server':
 	ip_mask_deny_postgres_user => '0.0.0.0/32',
 	ip_mask_allow_all_users => '0.0.0.0/0',
 	listen_addresses => '*',
 	ipv4acls => ['host all all 0.0.0.0/0 md5'],
-  postgres_password => $password,
+	postgres_password => $password,
 }
 
 # Install contrib modules
 class { 'postgresql::server::contrib':
-  package_ensure => 'present',
+	package_ensure => 'present',
 }
 
 postgresql::server::role { $user:
@@ -51,7 +55,7 @@ postgresql::server::db { 'rails_database_production':
 }
 
 postgresql::server::database_grant { 'test1':
-  privilege => 'ALL',
-  db        => 'rails_database_development',
-  role      => $user,
+	privilege => 'ALL',
+	db        => 'rails_database_development',
+	role      => $user,
 }
