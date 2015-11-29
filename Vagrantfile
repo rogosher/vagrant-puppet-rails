@@ -93,5 +93,5 @@ Vagrant.configure(2) do |config|
     puppet.manifest_file = 'default.pp'
   end
 
-  config.vm.provision :shell, inline: 'echo "DIR 01;36" > /home/vagrant/.dicolors'
+  config.vm.provision :shell, inline: 'echo "DIR 01;36" > /home/vagrant/.dircolors'
 end
