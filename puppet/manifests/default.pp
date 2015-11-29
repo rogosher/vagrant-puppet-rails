@@ -1,3 +1,7 @@
+package { 'imagemagick':
+	ensure => 'installed',
+}
+
 class { 'rbenv': }
 
 rbenv::plugin { 'sstephenson/ruby-build':}
@@ -10,9 +14,10 @@ rbenv::build { '2.2.3':
 rbenv::gem { 'rails': ruby_version => '2.2.3' }
 rbenv::gem { 'pg': ruby_version => '2.2.3' }
 
-package {'libpq-dev':
+package { 'libpq-dev':
 	ensure => 'installed',
 }
+
 $user = 'vagrant'
 $password = 'password'
 

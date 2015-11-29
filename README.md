@@ -35,3 +35,10 @@ To sync changes on the host to the `/vagrant` folder shared to the guest:
 - Type `$ vagrant rsync-auto`.
 
 The rsync-auto process will run in in the terminal until `Ctrl-C` is pressed.
+
+#### rsync-back
+While it is possible to watch for file changes on the host machine and sync to the Vagrant guest, it is not possible to watch for file changes on the guest and sync to the host. A manual solution is to use the Vagrant plugin rsync-back.
+
+```
+$ vagrant rsync-back
+```  
