@@ -1,5 +1,8 @@
 # Puppetfile for r10k modules
 
+mod 'apt',
+  :git => 'https://github.com/puppetlabs/puppetlabs-apt'
+
 mod 'stdlib',
   :git => 'https://github.com/puppetlabs/puppetlabs-stdlib'
 
@@ -11,3 +14,9 @@ mod 'concat',
 
 mod 'postgresql',
   :git => 'https://github.com/puppetlabs/puppetlabs-postgresql'
+
+mod 'nginx',
+  :git => 'https://github.com/jfryman/puppet-nginx'
+
+mod 'nodejs',
+  :git => 'https://github.com/puppet-community/puppet-nodejs'

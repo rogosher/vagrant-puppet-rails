@@ -1,0 +1,25 @@
+---
+classes:
+  - nginx
+packages:
+  imagemagick:
+    ensure: 'present'
+  sqlite3:
+    ensure: 'present'
+  libsqlite3-dev:
+    ensure: 'present'
+  libpq-dev:
+    ensure: 'present'
+  memcached:
+    ensure: 'present'
+  libxml2-dev:
+    ensure: 'present'
+  libxslt1-dev:
+    ensure: 'present'
+  libcurl4-openssl-dev:
+    ensure: 'present'
+  python-dev:
+    ensure: 'present'
+nginx::nginx_vhosts:
+  'test.site':
+    www_root: '/var/www/test.site'

@@ -22,3 +22,7 @@ log/
 
 # Project files
 /src
+
+# Scripts used to set Env
+set_env.*
+update.ps1

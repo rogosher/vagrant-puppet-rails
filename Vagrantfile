@@ -6,6 +6,7 @@ ENV["VAGRANT_DETECTED_OS"] = ENV["VAGRANT_DETECTED_OS"].to_s + " cygwin"
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
+  config.vm.host_name = "test.server"
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -32,7 +33,9 @@ Vagrant.configure(2) do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
-  config.vm.network "public_network"
+  config.vm.network "public_network",
+    bridge: ENV["VAGRANT_ADAPTER_CHOICE"]
+    #,ip: "10.0.0.14",
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -41,6 +44,9 @@ Vagrant.configure(2) do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
   config.vm.synced_folder ".", "/vagrant",
     type: "rsync", rsync__exclude: ".git/"
+
+  config.vm.synced_folder "puppet/hieradata", "/tmp/vagrant-puppet/hieradata",
+    type: "rsync"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -88,9 +94,16 @@ Vagrant.configure(2) do |config|
   config.r10k.puppetfile_path = 'puppet/Puppetfile'
 
   config.vm.provision :puppet do |puppet|
+    if ENV.key?('PUPPET_OPTS')
+      puppet.options = ENV['PUPPET_OPTS'].split(' ')
+    end
     puppet.module_path = 'puppet/modules'
     puppet.manifests_path = 'puppet/manifests'
     puppet.manifest_file = 'default.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
+    puppet.working_directory = '/tmp/vagrant-puppet'
+    puppet.synced_folder_type = 'rsync'
+    puppet.synced_folder_args = ['-a', '--delete', '--exclude=fixtures']
   end
 
   config.vm.provision :shell, inline: 'echo "DIR 01;36" > /home/vagrant/.dircolors'
