@@ -21,7 +21,7 @@ log/
 *.swo
 
 # Project files
-/src
+src/*
 
 # Scripts used to set Env
 set_env.*
