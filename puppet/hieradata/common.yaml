@@ -1,6 +1,10 @@
 ---
 classes:
+  - postgresql::server
   - nginx
+  - rbenv
+  - ::nodejs
+
 packages:
   imagemagick:
     ensure: 'present'
@@ -20,6 +24,54 @@ packages:
     ensure: 'present'
   python-dev:
     ensure: 'present'
+
+::nodejs:manage_package_repo: false
+::nodejs:nodejs_dev_package_ensure: 'present'
+::nodejs:npm_package_ensure: 'present'
+
 nginx::nginx_vhosts:
   'test.site':
     www_root: '/var/www/test.site'
+
+postgresql::server::contrib::package_ensure: 'present'
+postgresql::globals::encoding: 'UTF-8'
+postgresql::globals::locale: 'en_US.UTF-8'
+postgresql::server::listen_addresses: '*'
+postgresql::server::ip_mask_deny_postgres_user: '0.0.0.0/32'
+postgresql::server::epv4acls: "['host all all 0.0.0.0/0 md5']"
+postgresql::server::ip_mask_allow_all_users: '0.0.0.0/0'
+postgresql::server::postgres_password: "${password}"
+
+rbenv::plugins:
+  sstephenson/rbenv-vars:
+    latest: true
+  sstephenson/ruby-build:
+    latest: true
+
+rbenv::builds:
+  2.2.3:
+    global: true
+    env: ['RUBY_CONFIGURE_OPTS=--disable-install-doc']
+
+rbenv::gems:
+  pg:
+    ruby_version: 2.2.3
+    skip_docs: true
+  rails:
+    ruby_version: 2.2.3
+    skip_docs: true
+  uwsgi:
+    ruby_version: 2.2.3
+    skip_docs: true
+
+postgresql::server::roles:
+  "%{user}":
+    password_hash: "postgresql_password(%{user}, %{password})"
+
+postgresql::server::databases:
+  rails_database_development:
+    owner: "%{user}"
+  rails_database_test:
+    owner: "%{user}"
+  rails_database_production:
+    owner: "%{user}"
