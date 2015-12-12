@@ -13,11 +13,12 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  if config.vm.provier == 'aws'
+  if config.vm.provider == 'aws'
     config.vm.box = "dummy"
   else
     config.vm.box = "ubuntu/trusty64"
   end
+  
   config.vm.provider :aws do |aws, override|
     aws.access_key_id = "YOUR KEY"
     aws.secret_access_key = "YOUR SECRET KEY"
