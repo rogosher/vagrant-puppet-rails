@@ -24,8 +24,8 @@ Vagrant.configure(2) do |config|
     aws.secret_access_key = "YOUR SECRET KEY"
     aws.session_token = "SESSION TOKEN"
     aws.keypair_name = "KEYPAIR NAME"
-
-    aws.ami = "ami-7747d01e"
+    # us-west-2 trusty 14.04 LTS amd64 instance-store
+    aws.ami = "ami-b04959d1"
 
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = "PATH TO YOUR PRIVATE KEY"
